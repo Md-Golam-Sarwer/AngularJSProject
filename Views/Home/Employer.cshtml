@@ -1,0 +1,213 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section scripts {
+
+    <script src="~/lib/angular.js/angular.js"></script>
+
+    <script type="text/javascript">
+        angular.module("EmployerApp", []);
+
+    </script>
+    <script src="~/js/EmployerController.js"></script>
+}
+<br />
+<br />
+<br />
+<div class="container container-fluid" ng-app="EmployerApp" ng-controller="EmployerCtrl">
+    <div class="table table-responsive col-xs-12">
+
+         <form name="cfrm">
+             <table>
+                 <tr>
+                     <td>
+                         <label>Employee Name</label>
+                     </td>
+                     <td>
+                         <input type="text" class="alert alert-info" name="name" style="width: 100%; height : 90%;" ng-model="employerInfo.employeeName" required />
+                     </td>
+                     <td>
+                         <span ng-show="cfrm.name.$dirty && cfrm.name.$error.required"> Name is required</span>
+                     </td>
+
+
+                     <td>
+                         <label>Salary</label>
+                     </td>
+
+                     <td>
+                         <input type="text" class="alert alert-info" name="salary" style="width: 100%; height : 90%;" ng-model="employerInfo.salary" ng-maxlength="5" />
+                     </td>
+                     <td>
+                         <span ng-show="cfrm.salary.$dirty && cfrm.salary.$error.maxlength">Salary Maximum 5 Digit</span>
+
+                     </td>
+                 </tr>
+                 <tr>
+
+                     <td>
+                         <label>Email Address</label>
+                     </td>
+                     <td>
+                         <input type="email" class="alert alert-info" name="email" style="width: 100%; height: 90%;" ng-model="employerInfo.contactAddress" required />
+                     </td>
+                     <td>
+                         <span ng-show="cfrm.email.$dirty && cfrm.email.$error.required">Email is required</span>
+                         <span ng-show="cfrm.email.$dirty && cfrm.email.$error.email">Email is invalid</span>
+                     </td>
+
+
+                     <td>
+                         <label>Mobile No </label>
+                     </td>
+                     <td>
+                         <input type="text" class="alert alert-info" name="number" style="width: 100%; height: 90%;" ng-model="employerInfo.mobileNo" />
+                     </td>
+                     <td>
+
+                     <span ng-show="cfrm.number.$dirty && cfrm.number.$error.number">Number is invalid</span>
+                     </td>
+
+                 </tr>
+                 
+
+
+
+
+                 <tr>
+                     <td>
+                         <label> Date of Birth</label>
+                     </td>
+                     <td>
+                         <input type="date" class="alert alert-info" name="date" style="width: 100%; height: 90%;" ng-model="employerInfo.dob" />
+
+                     </td>
+                     <td>
+                         <td>
+                             <label>Active</label>
+                         </td>
+                        <td><input type="checkbox" ng-model="employerInfo.isActive" /></td>
+                     </td>
+                     <td>
+                         <label>Branch</label>
+                     </td>
+                     <td>
+                         <select required name="branchname" class="form-control" ng-click="getBranchList()" ng-model="employerInfo.branchID">
+                             <option value="">--Select Branch--</option>
+                             <option ng-repeat="b in BranchArray" value="{{b.branchID}}">{{b.branchName}}</option>
+                         </select>
+                     </td>
+                 </tr>
+                 @*<tr>
+                     <td>
+                         <label>Active</label>
+                     </td>
+                     <td><input type="checkbox" ng-model="employerInfo.isActive" /></td>
+                 </tr>*@
+
+
+
+
+
+                 <tr>
+                     <td>
+                         <button class="btn btn-success" ng-hide="employerInfo.EmployeeID" ng-click="employerInsert(employerInfo)"><i class="glyphicon glyphicon-cloud-download"></i>Create</button>
+                         <button class="btn btn-success" ng-hide="employerInfo.EmployeeID" ng-click="updateConfirm(employerInfo)"><i class="glyphicon glyphicon-refresh"></i>Update</button>
+                         <button class="btn btn-success" ng-show="employerInfo.EmployeeID" ng-click="cancel()"><i class="glyphicon glyphicon-remove-sign"></i>Cancel</button>
+                     </td>
+                 </tr>
+             </table>
+    </form>
+        <br />
+        <br />
+    <label>
+        Search : <input ng-model="subjectName" />
+    </label>
+    <h5>Employer Information</h5>
+    <table class="table table-bordered table-hover table-active">
+
+        <thead>
+            <tr>
+                <th>Employer ID</th>
+                <th>Employee Name</th>
+                <th> Salary</th>
+                <th>Email Address</th>
+                <th>Mobile No</th>
+                <th>DOB</th>
+                <th>IsActive</th>
+                <th>Branch ID</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in EmployerArray | filter: subjectName">
+                <td>{{item.employeeID}}</td>
+                <td>{{item.employeeName}}</td>
+                <td>{{item.salary}}</td>
+                <td>{{item.contactAddress}}</td>
+                <td>{{item.mobileNo}}</td>
+                <td>{{item.dob}}</td>
+                <td>{{item.isActive}}</td>
+                <td>{{item.branchID}}</td>
+                <td>
+                    <a href="#" class="text-info" ng-click="updateStart(item)"><i class="glyphicon glyphicon-check">Edit</i></a>
+                    <a href="#" class="text-danger" ng-click="deleteInformation(item)"><i class="glyphicon glyphicon-trash">Delete</i></a>
+                </td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+</div>
+
+<span style="color:red">{{msg}}</span>
+<br />
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

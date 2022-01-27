@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html ng-app="MainModule">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../js/angular.min.js"></script>
+
+    <script src="../js/Main.Js"></script>
+</head>
+<body >
+    <br />
+    <br />
+    <div ng-controller="PurchaseCtrl">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" hidden ng-model="objPurchase.id" />
+                        <input type="text" class="form-control" placeholder="Enter name" ngmodel="objPurchase.name" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Enter price" ngmodel="objPurchase.price" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="Enter quanity" ngmodel="objPurchase.quantity" />
+                    </td>
+                    <td>
+                        <button ng-click="SavePurchase()">Save</button>
+                        <button ng-click="UpdatePurchase()">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table class="table">
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Action</td>
+                </tr>
+                <tr ng-repeat="p in PurchaseList">
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.price }}</td>
+                    <td>{{ p.quantity }}</td>
+                    <td>
+                        <button ng-click="EditPurchase(p)">Edit</button>
+                        <button ng-click="DeletePurchase(p.id)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
